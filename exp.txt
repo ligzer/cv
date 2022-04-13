@@ -10,3 +10,16 @@ xmlbot
 planus - telegram resend
 planus - sync tickets
 telegram reserve bot
+
+
+Experienced in deploying and supporting different it-infrastructures.
+Have sound knowledge of networking and basic network services.
+Develop projects on different languages.
+A lot of experience in installation, deployment and maintenance of pupular products.
+f.e. MS Active Directory, MS SQL, Postgres, VMWare ESXi, Proxmox ve, nginx, GitLab CI.
+Большой опыт развертывания и поддержки сложных информационных инфраструктур. Имею
+твердые базовые знания о сетевых протоколах и основных сетевых сервисах. Писал и
+дорабатывал небольшие утилиты на разнообразных языках программирования. Большой опыт в
+инсталляции, настройке и сопровождении популярного ПО, в т.ч. MS ISA, MS Exchange, MS SQL,
+VMWare ESXi.
+

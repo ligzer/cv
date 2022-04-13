@@ -150,14 +150,46 @@
 % Command for printing skill progress bars
 \newcommand\skills{ 
 ~
+    \smartdiagram[bubble diagram]{
+        \textbf{DevOps},
+        \textbf{GitLab CI},
+        \textbf{Vagrant},
+        \textbf{Ansible},
+        \textbf{~Proxmox~},
+        \textbf{~~~~Esxi~~~~},
+        \textbf{Sentry},
+        \textbf{Systemd},
+        \textbf{Docker},
+        \textbf{Zabbix}
+    }
+\smartdiagramset{
+    bubble center node color = red
+}
+\\
+~
 	\smartdiagram[bubble diagram]{
-        \textbf{Material}\\\textbf{Characterization},
-        \textbf{Electro-/}\\\textbf{Chemical}\\\textbf{testing of cells},
-        \textbf{~~~~TEM~~~~~}\\\textbf{SEM},
-        \textbf{Raman}\\\textbf{Spectroscopy},
-        \textbf{Impedance}\\\textbf{Spectroscopy},
-        \textbf{X-Ray}\\\textbf{~~Diffraction~~},
-        \textbf{Coin cell}\\\textbf{Fabrication}
+        \textbf{Dev},
+        \textbf{~~~~~Python~~~~~},
+        \textbf{~~~C++~~~},
+        \textbf{~~~~~Django~~~~~},
+        \textbf{~~~~Celery~~~~},
+        \tiny\textbf{javascript},
+        \textbf{React},
+        \textbf{Redux}
+    }
+\smartdiagramset{
+    bubble center node color = green
+}
+\\
+~
+	\smartdiagram[bubble diagram]{
+        \textbf{other},
+        \textbf{~~~~~Linux~~~~~},
+        \textbf{Win Servers},
+        \scriptsize\textbf{Active}\\\scriptsize\textbf{Directory},
+        \textbf{Mikrotik},
+        \textbf{Asterisk},
+        \textbf{Networking}
     }
 }
 
@@ -178,9 +210,27 @@
 %  SIDEBAR LAYOUT
 %----------------------------------------------------------------------------------------
 
+
+\newcommand{\makesidebar}{
+  \begin{tikzpicture}[remember picture,overlay]
+      \node [rectangle, fill=sidecolor, anchor=north, minimum width=9cm, minimum height=\paperheight+1cm] (box) at (18cm,0.5cm){};
+  \end{tikzpicture}
+
+  \begin{textblock}{6}(15, 0.2)
+        \profilesection{Soft Skills}{4cm}
+        {\begin{itemize}
+             \item Responsive
+             \item Empathy
+             \item Stress Resistance
+             \item Meticulous
+             \item Self-sufficiency
+         \end{itemize}}
+  \end{textblock}
+}
+
 \newcommand{\makeprofile}{
   \begin{tikzpicture}[remember picture,overlay]
-      \node [rectangle, fill=sidecolor, anchor=north, minimum width=9cm, minimum height=\paperheight+1cm] (box) at (19cm,0.5cm){};
+      \node [rectangle, fill=sidecolor, anchor=north, minimum width=9cm, minimum height=\paperheight+1cm] (box) at (18cm,0.5cm){};
   \end{tikzpicture}
 
   %------------------------------------------------
@@ -231,13 +281,6 @@
           \end{array}
           $}
         & \href{tel:\cvnumberphone}{\cvnumberphone}\\}
-%      \ifthenelse{\equal{\href{\cvsite}{\cvsite}}{}}{}{
-%            {$
-%              \begin{array}{l}
-%              {\href{https://www.researchgate.net/profile/Umair_Gulzar4}{\includegraphics[scale=0.095]{img/researchgate_grey_2.png}}}
-%              \end{array}
-%              $}
-%             & \href{https://www.researchgate.net/profile/Umair_Gulzar4}{profile/Umair\_Gulzar4}\\ }
       \ifthenelse{\equal{\cvmail}{}}{}{
             {$
               \begin{array}{l}
@@ -255,50 +298,58 @@
 
         %------------------------------------------------
 
-        \profilesection{Interests}{3cm}
 
-		\interests{{Live Sketching/3},{Chess/4},{Philosophy and Music/5},{Traveling/5.8},{Energy Storage Systems/5.5}}
+        \profilesection{Language}{4cm}
+        {\begin{itemize}
+             \item  English text - \textbf{B2}
+             \item  English speech - \textbf{A2}
+             \item Russian - native
+         \end{itemize}}
 
-        \interests
+%
+%		\interests{{Responsive/2},{Empathy/4},{Stress Resistance/5},{Meticulous/1},{Self-sufficiency/1}}
 
-        \profilesection{References}{2.4cm}\\
+%        \interests
+
+%        \profilesection{References}{2.4cm}\\
 
                % \vspace{-5mm}
-    \renewcommand{\arraystretch}{1.6}
-    \begin{tabular}{p{1cm} @{\hskip 0.5cm}p{5cm}}
-      \ifthenelse{\equal{\href{\cvsite}{\cvsite}}{}}{}{
-            {$
-              \begin{array}{l}
-              {\href{\cvsite}{\hspace{-7pt}\includegraphics[scale=0.02]{img/name.png}}}
-              \end{array}
-              $}
-            & Remo Proietti Zaccaria\\}
-      \ifthenelse{\equal{Remo.Proietti@iit.it}{}}{}{
-            {$
-              \begin{array}{l}
-              {\href{mailto:Remo.Proietti@iit.it}{\includegraphics[scale=0.05]{img/email.png}}}
-              \end{array}
-              $}
-            & \href{mailto:Remo.Proietti@iit.it}{remo.proietti@iit.it}}
-    \end{tabular}
+%    \renewcommand{\arraystretch}{1.6}
+%    \begin{tabular}{p{1cm} @{\hskip 0.5cm}p{5cm}}
+%      \ifthenelse{\equal{\href{\cvsite}{\cvsite}}{}}{}{
+%            {$
+%              \begin{array}{l}
+%              {\href{\cvsite}{\hspace{-7pt}\includegraphics[scale=0.02]{img/name.png}}}
+%              \end{array}
+%              $}
+%            & Remo Proietti Zaccaria\\}
+%      \ifthenelse{\equal{Remo.Proietti@iit.it}{}}{}{
+%            {$
+%              \begin{array}{l}
+%              {\href{mailto:Remo.Proietti@iit.it}{\includegraphics[scale=0.05]{img/email.png}}}
+%              \end{array}
+%              $}
+%            & \href{mailto:Remo.Proietti@iit.it}{remo.proietti@iit.it}}
+%    \end{tabular}
 
- \renewcommand{\arraystretch}{1.6}
-    \begin{tabular}{p{1cm} @{\hskip 0.5cm}p{5cm}}
-      \ifthenelse{\equal{\href{\cvsite}{\cvsite}}{}}{}{
-            {$
-              \begin{array}{l}
-              {\href{\cvsite}{\hspace{-6pt}\includegraphics[scale=0.02]{img/name.png}}}
-              \end{array}
-              $}
-            & Claudio Capiglia\\}
-      \ifthenelse{\equal{claudio@mvc.biglobe.ne.jp}{}}{}{
-            {$
-              \begin{array}{l}
-              {\href{mailto:claudio@iit.it}{\includegraphics[scale=0.05]{img/email.png}}}
-              \end{array}
-              $}
-            & \href{mailto:claudio@mvc.biglobe.ne.jp}{claudio@mvc.biglobe.ne.jp}}
-    \end{tabular}
+% \renewcommand{\arraystretch}{1.6}
+
+%    \begin{tabular}{p{1cm} @{\hskip 0.5cm}p{5cm}}
+%      \ifthenelse{\equal{\href{\cvsite}{\cvsite}}{}}{}{
+%            {$
+%              \begin{array}{l}
+%              {\href{\cvsite}{\hspace{-6pt}\includegraphics[scale=0.02]{img/name.png}}}
+%              \end{array}
+%              $}
+%            & Claudio Capiglia\\}
+%      \ifthenelse{\equal{claudio@mvc.biglobe.ne.jp}{}}{}{
+%            {$
+%              \begin{array}{l}
+%              {\href{mailto:claudio@iit.it}{\includegraphics[scale=0.05]{img/email.png}}}
+%              \end{array}
+%              $}
+%            & \href{mailto:claudio@mvc.biglobe.ne.jp}{claudio@mvc.biglobe.ne.jp}}
+%    \end{tabular}
 
 
   \end{textblock}
@@ -353,12 +404,12 @@
 }
 
 \newcommand{\twentyitem}[5]{%
-	#1&\parbox[t]{0.83\textwidth}{%
+	\parbox[t]{0.17\textwidth}{#1} &\parbox[t]{0.83\textwidth}{%
 		\textbf{#2}%
 		\hfill%
 		{\footnotesize#3}\\%
         \ifblank{#4}{}{#4 \\}
-		#5\vspace{\parsep}%
+		#5\vspace{2\parsep}%
 	}\\
 }
 
@@ -385,7 +436,7 @@
 %	 MARGINS AND LINKS
 %----------------------------------------------------------------------------------------
 
-\RequirePackage[left=0.2cm,top=0.1cm,right=7.2cm,bottom=0.2cm,nohead,nofoot]{geometry}
+\RequirePackage[left=1cm,top=0.1cm,right=7.2cm,bottom=1cm,nohead,nofoot]{geometry}
 
 
 \usepackage{smartdiagram}
@@ -397,7 +448,7 @@
     %  specifies the minimum size of the bubbles
     bubble node size = 0.5cm,
     % specifies which is the distance among the bubble center node and the other bubbles
-    distance center/other bubbles = 0.3cm,
+    distance center/other bubbles = 0.5cm,
     % sets the distance from the text to the border of the bubble center node
     distance text center bubble = 0.5cm,
     % set center bubble color

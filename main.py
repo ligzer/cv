@@ -15,7 +15,12 @@ def add_job(job):
              markerfacecolor='blue',marker='.', markersize=6)
     plt.text(job.begin, i, job.title)
 
-    print(f"{job.begin.strftime('%b %Y')} - {job.end.strftime('%b %Y')}  {job.title}")
+
+    print("\\twentyitem\n"
+    	f"{{{job.begin.strftime('%b %Y')} - \\\\ {job.end.strftime('%b %Y')}}}\n"
+        f"{{ {job.title} }}\n")
+    # print(f"{job.begin.strftime('%b %Y')} - {job.end.strftime('%b %Y')}  {job.title}")
+
 
 
 class Job:
@@ -41,6 +46,7 @@ jobs = [
 
     Job(date(2008, 1, 1), 'BMSTU', date(2011, 5, 1), ),
     Job(date(2011, 3, 1), 'Mallina LTD - IT Support', date(2013, 6, 1)),
+    Job(date(2011, 6, 1), 'Mallina LTD - System and Database administrator', date(2013, 6, 1)),
     Job(date(2013, 6, 1), 'Individual Entrepreneur Dmitriev - IT Support'),
     Job(date(2011, 3, 1), 'planus - pbx System Developer(Python)', len=36),
     Job(date(2018, 1, 1), 'pycards - Developer(Python, C++)', len=12),
