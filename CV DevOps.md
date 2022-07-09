@@ -33,7 +33,7 @@ Experience:
 System and Network Administrator
 Some maybe-interesting things I have done in this time: I used linux-based system for mass cloning windows system image. Also multitranslation VNC, as replacement of projector.
 
-2011-2013 Mallina(Reastraunt company)
+2011-2013 Mallina(Reastraunt Managment company)
 IT – manager, system and network administrator, developer.
 In our it-department was two employees. We serviced six restaurants and one office. Main job is system and network administration, also overhead jobs, episodically programming. We begin using Asterisk, with simple rules, ingtegrated sql and bash scripts for ruling it.
 

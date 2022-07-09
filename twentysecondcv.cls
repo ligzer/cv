@@ -1,4 +1,4 @@
-\ProvidesClass{bluecv}[2022/03/26 CV class]
+\ProvidesClass{twentysecondcv}[2022/03/26 CV class]
 \LoadClass{article}
 \NeedsTeXFormat{LaTeX2e}
 
@@ -21,10 +21,11 @@
 \RequirePackage{wrapfig}
 \RequirePackage{enumitem}
 \RequirePackage{booktabs}
-\RequirePackage{changepage}
-\RequirePackage[hidelinks]{hyperref}
 
+\usepackage{changepage}
 \setlist[itemize]{leftmargin=*}
+
+\RequirePackage[hidelinks]{hyperref}
 \hypersetup{
     pdftitle={},
     pdfauthor={},
@@ -38,7 +39,7 @@
 \ProcessOptions\relax
 
 \ifxetex
-  \RequirePackage{letltxmacro}
+  \usepackage{letltxmacro}
   \setlength{\XeTeXLinkMargin}{1pt}
   \LetLtxMacro\SavedIncludeGraphics\includegraphics
   \def\includegraphics#1#{% #1 catches optional stuff (star/opt. arg.)

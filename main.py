@@ -1,30 +1,30 @@
 from datetime import date, timedelta
 import matplotlib.pyplot as plt
 from itertools import cycle
+
 cycol = cycle('bgrcmk')
-cyrange = cycle(range(1, 100,))
+cyrange = cycle(range(1, 100, ))
+
 
 def add_job(job):
-    x = [job.begin, job.end,]
+    x = [job.begin, job.end, ]
     # corresponding y axis values
     i = next(cyrange)
     y = [i, i]
 
     # plotting the points
     plt.plot(x, y, color=next(cycol), linewidth=2,
-             markerfacecolor='blue',marker='.', markersize=6)
+             markerfacecolor='blue', marker='.', markersize=6)
     plt.text(job.begin, i, job.title)
 
-
     print("\\twentyitem\n"
-    	f"{{{job.begin.strftime('%b %Y')} - \\\\ {job.end.strftime('%b %Y')}}}\n"
-        f"{{ {job.title} }}\n")
+          f"{{{job.begin.strftime('%b %Y')} - \\\\ {job.end.strftime('%b %Y')}}}\n"
+          f"{{ {job.title} }}\n")
     # print(f"{job.begin.strftime('%b %Y')} - {job.end.strftime('%b %Y')}  {job.title}")
 
 
-
 class Job:
-    def __init__(self, begin, title='', end=date.today(), len=None,):
+    def __init__(self, begin, title='', end=date.today(), len=None, ):
         self.begin = begin
         if len:
             self.end = self.begin + timedelta(days=30 * len)
@@ -43,7 +43,6 @@ class Job:
 
 
 jobs = [
-
     Job(date(2008, 1, 1), 'BMSTU', date(2011, 5, 1), ),
     Job(date(2011, 3, 1), 'Mallina LTD - IT Support', date(2013, 6, 1)),
     Job(date(2011, 6, 1), 'Mallina LTD - System and Database administrator', date(2013, 6, 1)),
@@ -58,10 +57,11 @@ jobs = [
     Job(date(2022, 3, 1), 'YourCodeReview (github administrator)'),
 ]
 
+
 def print_years():
     begin = date(2007, 1, 1)
     end = date.today()
-    plt.ylim(0, len(jobs)+1)
+    plt.ylim(0, len(jobs) + 1)
     plt.xlim(begin, end)
 
     list(map(add_job, sorted(jobs)))
