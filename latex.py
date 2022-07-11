@@ -1,68 +1,96 @@
-import numpy as np
-
 from pylatex import Document, Section, Subsection, Tabular, Math, TikZ, Axis, \
-    Plot, Figure, Matrix, Alignat
-from pylatex.utils import italic
+    Plot, Figure, Matrix, Alignat, Command, UnsafeCommand
+from pylatex.base_classes import CommandBase, Arguments, Environment
+from pylatex.utils import NoEscape
+import exp
 import os
+from datetime import datetime
+
+
+class TwentyItem(CommandBase):
+    _latex_name = 'twentyitem'
+
+
+class Twenty(Environment):
+    _latex_name = 'twenty'
+
 
 if __name__ == '__main__':
     image_filename = os.path.join(os.path.dirname(__file__), 'img/linkedin.png')
 
-    geometry_options = {"tmargin": "1cm", "lmargin": "10cm"}
-    doc = Document(geometry_options=geometry_options)
+    name = 'Michael'
+    surname = 'Prokopenko'
+    title = 'DevOps'
+    doc = Document(
+        documentclass='twentysecondcv',
+        document_options=["a4paper", ],
+        fontenc=None,
+    )
+    # doc.preamble.append(NoEscape('\profilepic{./TwentySecondsCurriculumVitae-LaTex/alice.jpeg}'))          # path of profile pic
+    # doc.preamble.append(NoEscape('\\skypeID{}'))  # your name
+    doc.preamble.append(Command('cvname', NoEscape(f'{name}\\\\{surname}')))  # your name
+    doc.preamble.append(Command('cvjobtitle', title))  # your actual job position
+    # doc.preamble.append(NoEscape('\\cvdate{' + str(datetime.now().time()) + '}'))  # date of birth
+    doc.preamble.append(Command('cvaddress', 'Montenegro, Bar'))  # address
+    doc.preamble.append(Command('cvnumberphone', '+382 6853 9017'))  # telephone number
+    doc.preamble.append(Command('cvmail', 'mike.pro@alexsupport.org'))  # e-mail
+    doc.preamble.append(Command('cvlinkedin', 'linkedin.com/in/ligzer'))
+    doc.preamble.append(Command('cvtelergram', 't.me/ligzer'))
+    doc.preamble.append(Command('cvrelocation', 'Relocation possible'))
+    doc.preamble.append(NoEscape('\\def\changemargin#1#2{\\list{}{\\rightmargin#2\\leftmargin#1}\\item[]}'
+                                 '\\let\endchangemargin=\\endlist'))
+    doc.preamble.append(Command(
+        'skills',
+        # \\textbf{Vagrant}
+        arguments=[
 
-    with doc.create(Section('The simple stuff')):
-        doc.append('Some regular text and some')
-        doc.append(italic('italic text. '))
-        doc.append('\nAlso some crazy characters: $&#{}')
-        with doc.create(Subsection('Math that is incorrect')):
-            doc.append(Math(data=['2*3', '=', 9]))
+            NoEscape(
+                '\\textbf{DevOps}, \\textbf{GitLab CI},\\textbf{Ansible},\\textbf{~Proxmox~},'
+                '\\textbf{~~~~Esxi~~~~},\\textbf{Sentry},\\textbf{Systemd},\\textbf{Docker},\\textbf{Zabbix}'
+            ),
+            NoEscape(
+                '\\textbf{Dev},'
+                '\\textbf{~~~~~Python~~~~~},'
+                '\\textbf{~~~C++~~~},'
+                '\\textbf{~~~~~Django~~~~~},'
+                '\\textbf{~~~~Celery~~~~},'
+                '\\tiny\\textbf{javascript},'
+                '\\textbf{React},'
+                '\\textbf{Redux}'),
+            NoEscape(
+                ' \\textbf{other},'
+                '\\textbf{~~~~~Linux~~~~~},'
+                '\\textbf{Win Servers},'
+                '\\scriptsize\\textbf{Active}\\\\\scriptsize\\textbf{Directory},'
+                '\\textbf{Mikrotik},'
+                '\\textbf{Asterisk},'
+                '\\textbf{Networking}'),
+        ]
+    ))
 
-        with doc.create(Subsection('Table of something')):
-            with doc.create(Tabular('rc|cl')) as table:
-                table.add_hline()
-                table.add_row((1, 2, 3, 4))
-                table.add_hline(1, 2)
-                table.add_empty_row()
-                table.add_row((4, 5, 6, 7))
+    doc.append(Command('makeprofile'))
+    doc.append(NoEscape('{\Huge\headingfont\color{headercolor}\givencvjobtitle}'))
+    with doc.create(Section('Work Experience')):
+        with doc.create(Twenty()):
+            for job in [x for x in exp.jobs if not x.hide][0:6]:
+                job: exp.Job = job
+                doc.append(TwentyItem(arguments=Arguments(
+                    NoEscape(job.dates()),
+                    NoEscape(job.title),
+                    NoEscape(job.company),
+                    NoEscape(job.format),
+                    job.description
+                )))
 
-    a = np.array([[100, 10, 20]]).T
-    M = np.matrix([[2, 3, 4],
-                   [0, 0, 1],
-                   [0, 0, 2]])
-
-    with doc.create(Section('The fancy stuff')):
-        with doc.create(Subsection('Correct matrix equations')):
-            doc.append(Math(data=[Matrix(M), Matrix(a), '=', Matrix(M * a)]))
-
-        with doc.create(Subsection('Alignat math environment')):
-            with doc.create(Alignat(numbering=False, escape=False)) as agn:
-                agn.append(r'\frac{a}{b} &= 0 \\')
-                agn.extend([Matrix(M), Matrix(a), '&=', Matrix(M * a)])
-
-        with doc.create(Subsection('Beautiful graphs')):
-            with doc.create(TikZ()):
-                plot_options = 'height=4cm, width=6cm, grid=major'
-                with doc.create(Axis(options=plot_options)) as plot:
-                    plot.append(Plot(name='model', func='-x^5 - 242'))
-
-                    coordinates = [
-                        (-4.77778, 2027.60977),
-                        (-3.55556, 347.84069),
-                        (-2.33333, 22.58953),
-                        (-1.11111, -493.50066),
-                        (0.11111, 46.66082),
-                        (1.33333, -205.56286),
-                        (2.55556, -341.40638),
-                        (3.77778, -1169.24780),
-                        (5.00000, -3269.56775),
-                    ]
-
-                    plot.append(Plot(name='estimate', coordinates=coordinates))
-
-        with doc.create(Subsection('Cute kitten pictures')):
-            with doc.create(Figure(position='h!')) as kitten_pic:
-                kitten_pic.add_image(image_filename, width='120px')
-                kitten_pic.add_caption('Look it\'s on its back')
-
-    doc.generate_pdf('full', clean_tex=False)
+    with doc.create(Section('Education')):
+        with doc.create(Twenty()):
+            for edu in exp.educations:
+                edu: exp.Job = edu
+                doc.append(TwentyItem(arguments=Arguments(
+                    NoEscape(edu.dates()),
+                    NoEscape(edu.title),
+                    NoEscape(edu.company),
+                    NoEscape(edu.format),
+                    NoEscape(edu.description)
+                )))
+    doc.generate_pdf(f'{title} {name} {surname}', clean_tex=False, compiler="xelatex")

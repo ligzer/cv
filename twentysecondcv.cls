@@ -1,13 +1,28 @@
-\ProvidesClass{twentysecondcv}[2022/03/26 CV class]
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Twenty Seconds Curriculum Vitae in LaTex
+% ****************************************
+%
+% License: MIT
+%
+% For further information please visit:
+% https://github.com/spagnuolocarmine/TwentySecondsCurriculumVitae-LaTex
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%
+% CLASS %
+%%%%%%%%%
+\ProvidesClass{twentysecondcv}[2022/11/07 CV class]
 \LoadClass{article}
 \NeedsTeXFormat{LaTeX2e}
 
-%----------------------------------------------------------------------------------------
-%	 REQUIRED PACKAGES
-%----------------------------------------------------------------------------------------
-
+%%%%%%%%%%%%
+% PACKAGES %
+%%%%%%%%%%%%
 \RequirePackage[quiet]{fontspec}
 \RequirePackage[sfdefault]{ClearSans}
+%\RequirePackage[T1]{fontenc}
 \RequirePackage{tikz}
 \RequirePackage{xcolor}
 \RequirePackage[absolute,overlay]{textpos}
@@ -21,10 +36,11 @@
 \RequirePackage{wrapfig}
 \RequirePackage{enumitem}
 \RequirePackage{booktabs}
-
+\RequirePackage{fontawesome}
 \usepackage{changepage}
-\setlist[itemize]{leftmargin=*}
+\usepackage{smartdiagram}
 
+\setlist[itemize]{leftmargin=*}
 \RequirePackage[hidelinks]{hyperref}
 \hypersetup{
     pdftitle={},
@@ -34,9 +50,23 @@
     colorlinks=false,           % no lik border color
     allbordercolors=white       % white border twentysecondcvcolor for all
 }
-
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
+%%%%%%%%%%%
+% OPTIONS %
+%%%%%%%%%%%
+% icons
+\newbool{icon}
+\DeclareOption{icon}{%
+  \booltrue{icon}
+}
+\DeclareOption{print}{\def\@cv@print{}}
+\DeclareOption*{
+  \PassOptionsToClass{\CurrentOption}{article}
+}
 \ProcessOptions\relax
+\ifbool{icon}{\RequirePackage{fontawesome}}{}
+
+\usetikzlibrary{calc}
 
 \ifxetex
   \usepackage{letltxmacro}
@@ -52,27 +82,26 @@
   }%
 \fi
 
-%----------------------------------------------------------------------------------------
-%	 COLOURS
-%----------------------------------------------------------------------------------------
-
+%%%%%%%%%%
+% colors %
+%%%%%%%%%%
 \definecolor{white}{RGB}{255,255,255}
-\definecolor{gray}{HTML}{4D4D4D}
-\definecolor{sidecolor}{HTML}{E7E7E7}
-\definecolor{mainblue}{HTML}{0E5484}
-\definecolor{maingray}{HTML}{B9B9B9}
-
-\definecolor{pblue}{HTML}{0395DE}
-
 \definecolor{darkgray}{HTML}{333333}
 \definecolor{gray}{HTML}{4D4D4D}
+\definecolor{sidecolor}{HTML}{E7E7E7}
 \definecolor{lightgray}{HTML}{999999}
 \definecolor{green}{HTML}{C2E15F}
 \definecolor{orange}{HTML}{FDA333}
 \definecolor{purple}{HTML}{D3A4F9}
-\definecolor{red}{HTML}{FB4485}
+\definecolor{red}{HTML}{FB0B00}
 \definecolor{blue}{HTML}{6CE0F1}
-\definecolor{pblue}{HTML}{0395DE}
+\definecolor{pblue}{HTML}{004D70}
+\definecolor{mainblue}{HTML}{0395DE}
+\definecolor{cerulean}{HTML}{007BA7}
+\definecolor{maingray}{HTML}{B9B9B9}
+\definecolor{oddsection}{HTML}{0E5484}
+\definecolor{evensection}{HTML}{0E5484}
+\definecolor{maindarkgray}{HTML}{B3B3B3}
 \definecolor{materialpurple}{HTML}{9C27B0}
 \definecolor{materialindigo}{HTML}{3F51B5}
 \definecolor{materialblue}{HTML}{2196F3}
@@ -85,6 +114,9 @@
 \definecolor{materialred}{HTML}{FF4436}
 \definecolor{materialorange}{HTML}{FF5722}
 
+
+
+
 \ifdefined\@cv@print
   \colorlet{green}{gray}
   \colorlet{orange}{gray}
@@ -92,13 +124,17 @@
   \colorlet{red}{gray}
   \colorlet{blue}{gray}
   \colorlet{fillheader}{white}
+  \colorlet{asidecolor}{sidecolor}
   \colorlet{header}{gray}
 \else
-  \colorlet{fillheader}{white}
-  \colorlet{header}{gray}
+  \colorlet{fillheader}{gray}
+  \colorlet{header}{white}
+  \colorlet{asidecolor}{sidecolor}
 \fi
+
 \colorlet{textcolor}{gray}
 \colorlet{headercolor}{gray}
+
 
 %----------------------------------------------------------------------------------------
 %	 MISC CONFIGURATIONS
@@ -115,94 +151,87 @@
 %-------------------------------------------------------------------------------------
 \newfontfamily\headingfont[Path = fonts/]{segoeuib.ttf}
 
-%----------------------------------------------------------------------------------------
-%	 SIDEBAR DEFINITIONS
-%----------------------------------------------------------------------------------------
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%
+% Profile Right SideBar %
+%%%%%%%%%%%%%%%%%%%%%%%%
 
 \setlength{\TPHorizModule}{1cm} % Left margin
 \setlength{\TPVertModule}{1cm} % Top margin
 
+% compute size of profile picture
+\newcommand{\imsize}{\linewidth}
 \newlength\imagewidth
 \newlength\imagescale
+\renewcommand{\imsize}{0.618\linewidth}
 \pgfmathsetlength{\imagewidth}{5cm}
 \pgfmathsetlength{\imagescale}{\imagewidth/600}
 
-\newcommand{\profilesection}[2]{\vspace{8pt}{\color{black!80} \huge #1 \rule[0.15\baselineskip]{#2}{1pt}}}
+%\newcommand{\profilesection}[2]{{\noindent\color{black!80} \huge #1 \rule[0.15\baselineskip]{#2}{1pt} \vspace{1pt}}}
+\newcommand{\profilesection}[2]{\vspace{0pt}{\color{black!80} \huge #1 \rule[0.15\baselineskip]{#2}{1pt} }}
 
-% Define custom commands for CV info
-\newcommand{\cvdate}[1]{\renewcommand{\cvdate}{#1}}
-\newcommand{\skypeID}[1]{\renewcommand{\skypeID}{#1}}
-\newcommand{\cvmail}[1]{\renewcommand{\cvmail}{#1}}
-\newcommand{\cvnumberphone}[1]{\renewcommand{\cvnumberphone}{#1}}
-\newcommand{\cvlinkedin}[1]{\renewcommand{\cvlinkedin}{#1}}
-\newcommand{\cvtelergram}[1]{\renewcommand{\cvtelergram}{#1}}
-\newcommand{\cvaddress}[1]{\renewcommand{\cvaddress}{#1}}
-\newcommand{\cvsite}[1]{\renewcommand{\cvsite}{#1}}
-\newcommand{\aboutme}[1]{\renewcommand{\aboutme}{#1}}
-\newcommand{\profilepic}[1]{\renewcommand{\profilepic}{#1}}
-\newcommand{\cvname}[1]{\renewcommand{\cvname}{#1}}
-\newcommand{\cvjobtitle}[1]{\renewcommand{\cvjobtitle}{#1}}
+\newcommand{\cvdate}[1]{\renewcommand{\givencvdate}{#1}}                % date
+\newcommand{\cvmail}[1]{\renewcommand{\givencvmail}{#1}}                % mail
+\newcommand{\cvnumberphone}[1]{\renewcommand{\givennumberphone}{#1}}    % phone
+\newcommand{\cvlinkedin}[1]{\renewcommand{\givenlinkedin}{#1}}
+\newcommand{\cvtelergram}[1]{\renewcommand{\giventelergram}{#1}}
+\newcommand{\cvaddress}[1]{\renewcommand{\givencvaddress}{#1}}          % address
+\newcommand{\cvsite}[1]{\renewcommand{\givencvsite}{#1}}                % site
+\newcommand{\aboutme}[1]{\renewcommand{\givenaboutme}{  \justifying#1}} % about me
+\newcommand{\profilepic}[1]{\renewcommand{\givenprofilepic}{#1}}        % picture
+\newcommand{\cvname}[1]{\renewcommand{\givencvname}{#1}}                % name
+\newcommand{\cvjobtitle}[1]{\renewcommand{\givencvjobtitle}{#1}}        % job title
+\newcommand{\cvrelocation}[1]{\renewcommand{\givencvrelocation}{#1}}        %
+
+
+\newcommand{\givencvname}{REQUIRED!} % name
+\newcommand{\givencvdate}{}          % date
+\newcommand{\givencvmail}{}          % mail
+\newcommand{\givennumberphone}{}     % phone
+\newcommand{\giventelergram}{}
+\newcommand{\givenlinkedin}{}
+\newcommand{\givencvaddress}{}       % address
+\newcommand{\givenaboutme}{}         % about me
+\newcommand{\givenprofilepic}{}      % picture
+\newcommand{\givencvsite}{}          % site
+\newcommand{\givencvjobtitle}{}      % job title
+\newcommand{\givencvrelocation}{}
 
 % Command for printing the contact information icons
-\newcommand*\icon[1]{\tikz[baseline=(char.base)]{\node[shape=circle,draw,inner sep=1pt, fill=mainblue,mainblue,text=white] (char) {#1};}}
+\newcommand*\icon[1]{\tikz[baseline=(char.base)]{
+    \node[shape=circle,draw,inner sep=1pt,
+        fill=mainblue,mainblue,text=white,
+        minimum size=6mm, maximum size=7mm] (char) {#1};}}
 
-% Command for printing skill progress bars
-\newcommand\skills{ 
-~
-    \smartdiagram[bubble diagram]{
-        \textbf{DevOps},
-        \textbf{GitLab CI},
-%        \textbf{Vagrant},
-        \textbf{Ansible},
-        \textbf{~Proxmox~},
-        \textbf{~~~~Esxi~~~~},
-        \textbf{Sentry},
-        \textbf{Systemd},
-        \textbf{Docker},
-        \textbf{Zabbix}
-    }
-\smartdiagramset{
-    bubble center node color = red
-}
-\\
-~
-	\smartdiagram[bubble diagram]{
-        \textbf{Dev},
-        \textbf{~~~~~Python~~~~~},
-        \textbf{~~~C++~~~},
-        \textbf{~~~~~Django~~~~~},
-        \textbf{~~~~Celery~~~~},
-        \tiny\textbf{javascript},
-        \textbf{React},
-        \textbf{Redux}
-    }
-\smartdiagramset{
-    bubble center node color = green
-}
-\\
-~
-	\smartdiagram[bubble diagram]{
-        \textbf{other},
-        \textbf{~~~~~Linux~~~~~},
-        \textbf{Win Servers},
-        \scriptsize\textbf{Active}\\\scriptsize\textbf{Directory},
-        \textbf{Mikrotik},
-        \textbf{Asterisk},
-        \textbf{Networking}
-    }
-}
+%\newcommand*\icon[1]{\tikz[baseline=(char.base)]{
+%\includegraphics[scale=0.05]{img/telegram}
+%%  \node[shape=circle,draw,inner sep=1pt, fill=mainblue,mainblue,text=white] (char) {#1};
+%}
+%}
 
-% Command for printing skill progress bars
-\newcommand\interests[1]{ 
-	\renewcommand{\interests}{
-		\begin{tikzpicture}
-			\foreach [count=\i] \x/\y in {#1}{
-				\draw[fill=maingray,maingray] (0,\i) rectangle (6,\i+0.4);
-				\draw[fill=white,mainblue](0,\i) rectangle (\y,\i+0.4);
-				\node [above right] at (0,\i+0.4) {\x};
-			}
-		\end{tikzpicture}
-	}
+% Text in square node with rounded corners; #1 -> text, #2 -> color
+%\newcommand*\round[2]{%
+%\tikz[baseline=(char.base)]\node[anchor=north west, draw,rectangle,
+%  rounded corners, inner sep=1.6pt, minimum size=5.5mm, text height=3.6mm,
+%  fill=#2,#2,text=white](char){#1};%
+%}
+
+% skill bar graphs
+\newcommand\skills[3]{
+  \renewcommand{\givenskill}{
+    \noindent
+        ~
+        \smartdiagram[bubble diagram]{#1}
+        \smartdiagramset{ bubble center node color = materialred }
+        \\
+        ~
+        \smartdiagram[bubble diagram]{#2}
+        \smartdiagramset{bubble center node color = green}
+        \\
+        ~
+        \smartdiagram[bubble diagram]{#3}
+  }
 }
 
 %----------------------------------------------------------------------------------------
@@ -226,132 +255,92 @@
          \end{itemize}}
   \end{textblock}
 }
+% text style skills
+\newcommand{\givenskill}{}
+  \newcommand\skillstext[1]{
+    \renewcommand{\giventextskill}{
+    \begin{flushleft}
+    \noindent
+    \foreach [count=\i] \x/\y in {#1}
+    {
+      \x$ \star $\y
+    }
+    \end{flushleft}
+  }
+}
 
-\newcommand{\makeprofile}{
+\newcommand{\giventextskill}{}
+
+\newcommand{\makeprofile}
+{
+  % grey bar on the left side
   \begin{tikzpicture}[remember picture,overlay]
-      \node [rectangle, fill=sidecolor, anchor=north, minimum width=9cm, minimum height=\paperheight+1cm] (box) at (18cm,0.5cm){};
+      \node [rectangle, fill=asidecolor, anchor=north, minimum width=9.90cm, minimum height=\paperheight+3cm] (box) at (18cm,2cm){};
   \end{tikzpicture}
+ %------------------------------------------------
+  \begin{textblock}{6}(14.4, 0.2)
+    \begin{flushleft}
+%      \hspace{13pt}
 
-  %------------------------------------------------
+      % profile picture
+%      \ifthenelse{\equal{\givenprofilepic}{}}{}{\begin{tikzpicture}[x=\imagescale,y=-\imagescale]
+%          \clip (600/2, 567/2) circle (567/2);
+%          \node[anchor=north west, inner sep=0pt, outer sep=0pt] at (0,0) {\includegraphics[width=\imagewidth]{\givenprofilepic}};
+%      \end{tikzpicture}}
 
-  \begin{textblock}{6}(15, 0.2)
+      % name
+      \vspace{4mm}
+      {\Huge\color{pblue}\givencvname}
+      %------------------------------------------------
+      % jobtitle
+%      \begin{flushright}
+%        {\Large\color{black!80}\givencvjobtitle}
+%      \end{flushright}
+      %------------------------------------------------
 
-    %------------------------------------------------
+%        \vspace{5mm}
+      \renewcommand{\arraystretch}{1.6}
 
-        \vspace{4mm}
-    {\Huge\color{pblue}\cvname}
-
-    %------------------------------------------------
-
-%    {\Large\color{black!80}\cvjobtitle}
-
-    %------------------------------------------------
-
-        \vspace{5mm}
-    \renewcommand{\arraystretch}{1.6}
-    \begin{tabular}{p{1cm} @{\hskip 0.5cm}p{5cm}}
-
-          \ifthenelse{\equal{\skypeID}{}}{}{
-            {$
-              \begin{array}{l}
-              {{\href{callto:\skypeID}{\includegraphics[scale=0.05]{img/skype}}}}
-              \end{array}
-              $}
-            & \skypeID\\}
-
-      \ifthenelse{\equal{\cvlinkedin}{}}{}{
-        {$
-          \begin{array}{l}
-              {\href{https:\\\cvlinkedin}{\includegraphics[scale=0.09]{img/linkedin}}}
-          \end{array}
-          $}
-        & \href{https:\\\cvlinkedin}{\cvlinkedin}\\}
-      \ifthenelse{\equal{\cvtelergram}{}}{}{
-        {$
-          \begin{array}{l}
-              {\href{https:\\\cvtelergram}{\includegraphics[scale=0.09]{img/telegram}}}
-          \end{array}
-          $}
-        & \href{https:\\\cvtelergram}{\cvtelergram}\\}
-      \ifthenelse{\equal{\cvnumberphone}{}}{}{
-        {$
-          \begin{array}{l}
-              {\href{tel:\cvnumberphone}{\includegraphics[scale=0.09]{img/tel}}}
-          \end{array}
-          $}
-        & \href{tel:\cvnumberphone}{\cvnumberphone}\\}
-      \ifthenelse{\equal{\cvmail}{}}{}{
-            {$
-              \begin{array}{l}
-              {\href{mailto:\cvmail}{\includegraphics[scale=0.09]{img/email}}}
-              \end{array}
-              $}
-            & \href{mailto:\cvmail}{\cvmail}}
-    \end{tabular}
-
-    %------------------------------------------------
-
-        \profilesection{Skills}{4cm}
-
-    	\skills
-
-        %------------------------------------------------
-
-
-        \profilesection{Language}{4cm}
+      \begin{tabular}{ p{1cm}   p{5cm}}
+        % CV date
+        \ifthenelse{\equal{\givencvdate}{}}{}{\textsc{\icon{\faInfo}} & \givencvdate\\}
+        % CV Linkedin
+        \ifthenelse{\equal{\givenlinkedin}{}}{}{\textsc{\icon{\faLinkedin}}
+          & \href{https://\givenlinkedin}{\givenlinkedin}\\}
+        % CV Telegram
+        \ifthenelse{\equal{\giventelergram}{}}{}{\textsc{\icon{\faPaperPlane}}
+          & \href{https://\giventelergram}{\giventelergram}\\}
+        % CV phone
+        \ifthenelse{\equal{\givennumberphone}{}}{}{\textsc{\icon{\LARGE\faMobile}}
+          & \href{tel:\givennumberphone}{\givennumberphone}\\}
+        % CV site
+        \ifthenelse{\equal{\givencvsite}{}}{}{\textsc{\icon{\Mundus}}
+          & \href{\givencvsite}{\textcolor{cerulean}\givencvsite}\\}
+        % CV mail
+        \ifthenelse{\equal{\givencvmail}{}}{}{\textsc{\icon{\large\faAt}}
+          & \href{mailto:\givencvmail}{\givencvmail}\\}
+        % CV address
+        \ifthenelse{\equal{\givencvaddress}{}}{}{\textsc{\Large\icon{\faMapMarker}}
+          & \href{https://www.google.com/maps/place/Bar,+Montenegro/@42.1021263,19.0706027,10z/}{\givencvaddress}\\}
+        % CV relocation
+        \ifthenelse{\equal{\givencvrelocation}{}}{}{\textsc{\icon{\faPlane}}
+          & \givencvrelocation\\}
+      \end{tabular}
+      % skills with scale
+      \profilesection{Skills}{5cm}
+      \givenskill
+      \noindent
+      \profilesection{Language}{5cm}
         {\begin{itemize}
-             \item  English text - \textbf{B2}
-             \item  English speech - \textbf{A2}
+             \item English text - \textbf{B2}
+             \item English speech - \textbf{A2}
+             \item Montenegrin - study
              \item Russian - native
          \end{itemize}}
-
-%
-%		\interests{{Responsive/2},{Empathy/4},{Stress Resistance/5},{Meticulous/1},{Self-sufficiency/1}}
-
-%        \interests
-
-%        \profilesection{References}{2.4cm}\\
-
-               % \vspace{-5mm}
-%    \renewcommand{\arraystretch}{1.6}
-%    \begin{tabular}{p{1cm} @{\hskip 0.5cm}p{5cm}}
-%      \ifthenelse{\equal{\href{\cvsite}{\cvsite}}{}}{}{
-%            {$
-%              \begin{array}{l}
-%              {\href{\cvsite}{\hspace{-7pt}\includegraphics[scale=0.02]{img/name.png}}}
-%              \end{array}
-%              $}
-%            & Remo Proietti Zaccaria\\}
-%      \ifthenelse{\equal{Remo.Proietti@iit.it}{}}{}{
-%            {$
-%              \begin{array}{l}
-%              {\href{mailto:Remo.Proietti@iit.it}{\includegraphics[scale=0.05]{img/email.png}}}
-%              \end{array}
-%              $}
-%            & \href{mailto:Remo.Proietti@iit.it}{remo.proietti@iit.it}}
-%    \end{tabular}
-
-% \renewcommand{\arraystretch}{1.6}
-
-%    \begin{tabular}{p{1cm} @{\hskip 0.5cm}p{5cm}}
-%      \ifthenelse{\equal{\href{\cvsite}{\cvsite}}{}}{}{
-%            {$
-%              \begin{array}{l}
-%              {\href{\cvsite}{\hspace{-6pt}\includegraphics[scale=0.02]{img/name.png}}}
-%              \end{array}
-%              $}
-%            & Claudio Capiglia\\}
-%      \ifthenelse{\equal{claudio@mvc.biglobe.ne.jp}{}}{}{
-%            {$
-%              \begin{array}{l}
-%              {\href{mailto:claudio@iit.it}{\includegraphics[scale=0.05]{img/email.png}}}
-%              \end{array}
-%              $}
-%            & \href{mailto:claudio@mvc.biglobe.ne.jp}{claudio@mvc.biglobe.ne.jp}}
-%    \end{tabular}
-
-
+      \noindent
+    \end{flushleft}
   \end{textblock}
+  \vspace{-10pt}
 }
 
 
@@ -359,32 +348,44 @@
 %	 COLOURED SECTION TITLE BOX
 %----------------------------------------------------------------------------------------
 
+\newcounter{colorCounter}
 % Command to create the rounded boxes around the first three letters of section titles
 \newcommand*\round[2]{%
 	\tikz[baseline=(char.base)]\node[anchor=north west, draw,rectangle, rounded corners, inner sep=1.6pt, minimum size=5.5mm, text height=3.6mm, fill=#2,#2,text=white](char){#1};%
 }
 
 \def\@sectioncolor#1#2#3{%
-	{%
-		\color{pblue} #1#2#3%
-	}%
+  {%
+		\color{mainblue} #1#2#3%
+  }%
+  \stepcounter{colorCounter}%
 }
-
 
 \renewcommand{\section}[1]{
   \par\vspace{\parskip}
-	{%
-		\LARGE\headingfont\color{headercolor}%
-		\@sectioncolor #1%
-	}
+  {%
+    \LARGE\headingfont\color{headercolor}%
+    \@sectioncolor #1%
+  }
+  \par\vspace{\parskip}
+}
+
+\newcommand{\sectionicon}[2]{
+  \par%
+  {%
+    \LARGE\headingfont
+    #1
+    \color{headercolor}%
+    \@sectioncolor #2%
+  }
   \par\vspace{\parskip}
 }
 
 \renewcommand{\subsection}[1]{
 	\par\vspace{.5\parskip}{%
-		\Large\headingfont\color{headercolor} #1%
-	}
-	\par\vspace{.25\parskip}%
+        \Large\headingfont\color{headercolor} #1%
+    }
+    \par\vspace{.25\parskip}%
 }
 
 \pagestyle{empty}
@@ -397,19 +398,34 @@
 
 % New environment for the long list
 \newenvironment{twenty}{%
-	\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ll}
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ll}
 }{%
-	\end{tabular*}
+  \end{tabular*}
 }
-
+%\renewcommand{\bfseries}{\color{headercolor}}
 \newcommand{\twentyitem}[5]{%
 	\parbox[t]{0.17\textwidth}{#1} &\parbox[t]{0.83\textwidth}{%
-		\textbf{#2}%
-		\hfill%
-		{\footnotesize#3}\\%
-        \ifblank{#4}{}{#4 \\}
-		#5\vspace{2\parsep}%
-	}\\
+    \textbf{#2}%
+    \hfill%
+    {\footnotesize#3}\\%
+    \ifblank{#4}{}{#4 \\}
+    #5\vspace{2\parsep}%
+  }\\
+}
+\setlength{\tabcolsep}{0pt}
+\newenvironment{twentyicon}{%
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ll}
+}{%
+  \end{tabular*}
+}
+%\renewcommand{\bfseries}{\color{headercolor}}
+\newcommand{\twentyitemicon}[5]{%
+ \hspace{3pt}\faicon{#1}\hspace{2pt}#2&\parbox[t]{11.2cm}{%
+    \textbf{#3}%
+    \hfill%
+    {\footnotesize#4}\\%
+    #5\vspace{\parsep}%
+  }\\%
 }
 
 %----------------------------------------------------------------------------------------
@@ -420,25 +436,37 @@
 
 % New environment for the small list
 \newenvironment{twentyshort}{%
-	\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ll}
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ll}
 }{%
-	\end{tabular*}
+  \end{tabular*}
 }
+%\renewcommand{\bfseries}{\color{headercolor}}
 
 \newcommand{\twentyitemshort}[2]{%
-	#1&\parbox[t]{0.83\textwidth}{%
-		#2%
-	}\\
+  \hspace{5pt}#1&\parbox[t]{11.5cm}{%
+    \textbf{#2}%
+  }\\%
+}
+\setlength{\tabcolsep}{0pt}
+\newenvironment{twentyshorticon}{%
+  \begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}ll}
+}{%
+  \end{tabular*}
+}
+%\renewcommand{\bfseries}{\color{headercolor}}
+\newcommand{\twentyitemshorticon}[3]{%
+  \hspace{3pt}\faicon{#1}\hspace{3pt}#2&
+      \parbox[t]{11.5cm}{%
+    \textbf{#3}%
+  }\\%
 }
 
 %----------------------------------------------------------------------------------------
 %	 MARGINS AND LINKS
 %----------------------------------------------------------------------------------------
 
-\RequirePackage[left=1cm,top=0.1cm,right=7.2cm,bottom=1cm,nohead,nofoot]{geometry}
+\RequirePackage[left=1cm,top=0.6cm,right=7.2cm,bottom=1cm,nohead,nofoot]{geometry}
 
-
-\usepackage{smartdiagram}
 \smartdiagramset{
     bubble center node font = \footnotesize,
     bubble node font = \footnotesize,
@@ -451,7 +479,7 @@
     % sets the distance from the text to the border of the bubble center node
     distance text center bubble = 0.5cm,
     % set center bubble color
-    bubble center node color = pblue,
+    bubble center node color = mainblue,
     % define the list of colors usable in the diagram
     set color list = {lightgray, materialcyan, orange, green, materialorange, materialteal, materialamber, materialindigo, materialgreen, materiallime},
     % sets the opacity at which the bubbles are shown
