@@ -93,4 +93,4 @@ if __name__ == '__main__':
                     NoEscape(edu.format),
                     NoEscape(edu.description)
                 )))
-    doc.generate_pdf(f'{title} {name} {surname}', clean_tex=False, compiler="xelatex")
+    doc.generate_pdf(f'./latex/{title} {name} {surname}', clean_tex=False, compiler="xelatex")

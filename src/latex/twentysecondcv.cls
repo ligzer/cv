@@ -149,7 +149,7 @@
 % --------------------------------------------------------------------------------------
 % 	FONTS
 %-------------------------------------------------------------------------------------
-\newfontfamily\headingfont[Path = fonts/]{segoeuib.ttf}
+\newfontfamily\headingfont[Path = ./fonts/]{segoeuib.ttf}
 
 
 
