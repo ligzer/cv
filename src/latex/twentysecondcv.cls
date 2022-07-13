@@ -202,7 +202,7 @@
 \newcommand*\icon[1]{\tikz[baseline=(char.base)]{
     \node[shape=circle,draw,inner sep=1pt,
         fill=mainblue,mainblue,text=white,
-        minimum size=6mm, maximum size=7mm] (char) {#1};}}
+        minimum size=6mm] (char) {#1};}}
 
 %\newcommand*\icon[1]{\tikz[baseline=(char.base)]{
 %\includegraphics[scale=0.05]{img/telegram}

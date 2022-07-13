@@ -4,7 +4,6 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-matplotlib = "==3.5.2"
 pylatex = "==1.4.1"
 
 [dev-packages]

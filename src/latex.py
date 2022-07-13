@@ -1,3 +1,5 @@
+import shutil
+
 from pylatex import Document, Section, Subsection, Tabular, Math, TikZ, Axis, \
     Plot, Figure, Matrix, Alignat, Command, UnsafeCommand
 from pylatex.base_classes import CommandBase, Arguments, Environment
@@ -26,11 +28,8 @@ if __name__ == '__main__':
         document_options=["a4paper", ],
         fontenc=None,
     )
-    # doc.preamble.append(NoEscape('\profilepic{./TwentySecondsCurriculumVitae-LaTex/alice.jpeg}'))          # path of profile pic
-    # doc.preamble.append(NoEscape('\\skypeID{}'))  # your name
     doc.preamble.append(Command('cvname', NoEscape(f'{name}\\\\{surname}')))  # your name
     doc.preamble.append(Command('cvjobtitle', title))  # your actual job position
-    # doc.preamble.append(NoEscape('\\cvdate{' + str(datetime.now().time()) + '}'))  # date of birth
     doc.preamble.append(Command('cvaddress', 'Montenegro, Bar'))  # address
     doc.preamble.append(Command('cvnumberphone', '+382 6853 9017'))  # telephone number
     doc.preamble.append(Command('cvmail', 'mike.pro@alexsupport.org'))  # e-mail
@@ -93,4 +92,6 @@ if __name__ == '__main__':
                     NoEscape(edu.format),
                     NoEscape(edu.description)
                 )))
-    doc.generate_pdf(f'./latex/{title} {name} {surname}', clean_tex=False, compiler="xelatex")
+    pdfname = f'./latex/{title} {name} {surname}'
+    doc.generate_pdf(pdfname, clean_tex=False, compiler="xelatex")
+    shutil.copy(f"{pdfname}.pdf", '..')
