@@ -321,7 +321,7 @@
           & \href{mailto:\givencvmail}{\givencvmail}\\}
         % CV address
         \ifthenelse{\equal{\givencvaddress}{}}{}{\textsc{\Large\icon{\faMapMarker}}
-          & \href{https://www.google.com/maps/place/Bar,+Montenegro/@42.1021263,19.0706027,10z/}{\givencvaddress}\\}
+          & \href{https://www.google.com/maps/place/Bar,+Montenegro/@42,19,6z/}{\givencvaddress}\\}
         % CV relocation
         \ifthenelse{\equal{\givencvrelocation}{}}{}{\textsc{\icon{\faPlane}}
           & \givencvrelocation\\}
