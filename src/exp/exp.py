@@ -31,14 +31,6 @@ anzu = Job(
     "Develop and maintenance simple system for accounting production in jewelry workshop. "
     "In project used systemd, GitLab CI, docker-compose, postgresql. "
     "For asynchron integration with digital registration system of precious metals used celery and mongodb. "
-    # "Highlight of this project - advanced nomenclature of products and subproducts."
-    # "Also it was integrated with digital registration system of precious metals."
-    # EnumItem(
-    #     arguments=[
-    #         Item("System for accounting production in jewelry workshop"),
-    #         Item("Integration with digital registration system of precious metals"),
-    #     ]
-    # ),
 )
 
 reviewcode = Job(
@@ -81,13 +73,6 @@ itsm_main = Job(
         "{\\item{System and network administration(locals, vpn for internal services, public wifi's)}}"
         "\\end{itemize}"
     )
-    # EnumItem(
-    #     arguments=[
-    #         Item("System and network administration"),
-    #         Item("Workflow organization"),
-    #         Item("Contact with clients"),
-    #     ]
-    # ),
 )
 
 itsm_tbbot = Job(
@@ -97,11 +82,6 @@ itsm_tbbot = Job(
     "\\textbf{Alexsupport}",
     "Part-time",
     "Develop telegram bot for reserving tables in restaurant, using only mongodb."
-    # EnumItem(
-    #     arguments=[
-    #         Item("Telegram bot for reserving tables in restaurant"),
-    #     ]
-    # ),
 )
 
 itsm_resendbot = Job(
@@ -112,22 +92,6 @@ itsm_resendbot = Job(
     "Part-time",
     "Develop and maintenance telegram bot for it-support restaurants. It's deployed on lxc, "
     "using postgresql, mongodb, django, celery"
-    # EnumItem(
-    #     arguments=[
-    #         Item(
-    #             "Employers had to ask clients to send photos of incidents via telegram to private messengers"
-    #         ),
-    #         Item("Develop telegram bot for contacting with clients"),
-    #         Item(
-    #             "Our bot resending messages from chat associated with site(usually - restaurant) to our backend chat."
-    #         ),
-    #         Item(
-    #             "Such organization allowed us to contact, with manager on shift. Managers able to send"
-    #             "photos to describe incidents shortly. When the duty manager changes, they easy get information about"
-    #             "current incidents."
-    #         ),
-    #     ]
-    # ),
 )
 
 itsm_pycards = Job(
@@ -138,13 +102,6 @@ itsm_pycards = Job(
     "Part-time",
     "Develop and maintenance personal discount system for restaurant management company. "
     "Cliend-side deployed on windows, server-side on vps.",
-    # EnumItem(
-    #     arguments=[
-    #         Item(
-    #           "Develop and maintenance personal discount system for restaurant management company."
-    #         ),
-    #     ]
-    # ),
 )
 itsm_sync_tickets = Job(
     date(2014, 1, 1),
@@ -174,20 +131,6 @@ itsm_pbx = Job(
     "For PBX management used AMI and django-based app. It's also integrated with telegram for convenience. "
     "For asyncron tasks used celery. "
     "It's deployed on proxmox via lxc with postgresql and mongodb. "
-    # EnumItem(
-    #     arguments=[
-    #         Item("Users contact with specialists directly by phones."),
-    #         Item(
-    #             "We wanted to deploy pbx with possibility to receive calls outside the office"
-    #         ),
-    #         Item(
-    #             "I have deployed asterisk and develop tool to manage calls."
-    #             "It was first time managed by usual dialplan with sql,"
-    #             "lua-dialpan via AMI and bash script, and finally Django app via AGI."
-    #         ),
-    #         Item("A functioning PBX with mobile employees and management via telegram"),
-    #     ]
-    # ),
 )
 mallina_sysadmin = Job(
     date(2011, 3, 1),
