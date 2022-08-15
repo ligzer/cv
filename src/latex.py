@@ -52,7 +52,7 @@ if __name__ == "__main__":
     # https://www.google.com/maps/place/Bar,+Montenegro/@42,19,6z/
     doc.preamble.append(Command("cvnumberphone", "+382 6853 9017"))  # telephone number
     doc.preamble.append(Command("cvmail", "mike.pro@alexsupport.org"))  # e-mail
-    doc.preamble.append(Command("cvlinkedin", "linkedin.com/in/ligzer"))
+    # doc.preamble.append(Command("cvlinkedin", "linkedin.com/in/ligzer"))
     doc.preamble.append(Command("cvtelergram", "t.me/ligzer"))
     doc.preamble.append(Command("cvrelocation", "Relocation possible"))
     doc.preamble.append(
@@ -104,9 +104,16 @@ if __name__ == "__main__":
 
     doc.append(Command("makeprofile"))
     doc.append(NoEscape("{\Huge\headingfont\color{headercolor}\givencvjobtitle}"))
+
+
     with doc.create(Section("Work Experience")):
+        # doc.append("Experienced in deploying and supporting different it-infrastructures."
+        #            "Have sound knowledge of networking and basic network services."
+        #            "Develop projects on different languages."
+        #            "A lot of experience in installation, deployment and maintenance of pupular products."
+        #            "f.e. MS Active Directory, MS SQL, Postgres, VMWare ESXi, Proxmox ve, nginx, GitLab CI.")
         with doc.create(Twenty()):
-            for job in [x for x in exp.jobs if not x.hide][0:6]:
+            for job in [x for x in exp.jobs if not x.hide][0:7]:
                 job: exp.Job = job
                 doc.append(
                     TwentyItem(
