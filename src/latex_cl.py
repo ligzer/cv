@@ -2,21 +2,8 @@ import os
 import shutil
 from datetime import datetime
 
-from pylatex import (
-    Alignat,
-    Axis,
-    Command,
-    Document,
-    Figure,
-    Math,
-    Matrix,
-    Plot,
-    Section,
-    Subsection,
-    Tabular,
-    TikZ,
-    UnsafeCommand,
-)
+from pylatex import (Alignat, Axis, Command, Document, Figure, Math, Matrix,
+                     Plot, Section, Subsection, Tabular, TikZ, UnsafeCommand)
 from pylatex.base_classes import Arguments, CommandBase, Environment
 from pylatex.utils import NoEscape
 

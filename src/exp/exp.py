@@ -29,9 +29,7 @@ anzu = Job(
     i18n.t("expierence.anzu.title"),
     company_url(i18n.t("expierence.anzu.url"), i18n.t("expierence.anzu.name")),
     i18n.t("expierence.contract"),
-    i18n.t("expierence.tmp") + "Develop and maintenance simple system for accounting production in jewelry workshop. "
-                               "In project used systemd, GitLab CI, docker-compose, postgresql. "
-                               "For asynchron integration with digital registration system of precious metals used celery and mongodb. "
+    i18n.t("expierence.anzu.describe")
 )
 
 reviewcode = Job(
@@ -64,16 +62,8 @@ itsm_main = Job(
     None,
     i18n.t("expierence.alexsupport.it.title"),  # + "IT Support",
     NoEscape("\\textbf{"+i18n.t("expierence.alexsupport.name")+"}"),
-    i18n.t("expierence.tmp") + "Fulltime",
-    i18n.t("expierence.tmp") + NoEscape(
-        "\\begin{itemize}"
-        "{\\item{Deploying and maintenance restaurant-specific products(iiko, r-keeper, sh4)}}"
-        "{\\item{Deploying and maintenance popular products(IIS, MSSQL, MS Exchange, Postgresql, "
-        "Active Directory, etc.)}}"
-        "{\\item{Integration client's systems with outsource-projects}}"
-        "{\\item{System and network administration(locals, vpn for internal services, public wifi's)}}"
-        "\\end{itemize}"
-    )
+    i18n.t("expierence.fulltime"),
+    NoEscape(i18n.t("expierence.alexsupport.it.describe"))
 )
 
 itsm_tbbot = Job(
@@ -82,7 +72,7 @@ itsm_tbbot = Job(
     i18n.t("expierence.alexsupport.reserverbot.title"),
     NoEscape("\\textbf{"+i18n.t("expierence.alexsupport.name")+"}"),
     i18n.t("expierence.parttime"),
-    i18n.t("expierence.tmp") + "Develop telegram bot for reserving tables in restaurant, using only mongodb."
+    i18n.t("expierence.alexsupport.reserverbot.describe")
 )
 
 itsm_resendbot = Job(
@@ -91,8 +81,7 @@ itsm_resendbot = Job(
     i18n.t("expierence.alexsupport.supportbot.title"),  # + "Python Developer",
     NoEscape("\\textbf{"+i18n.t("expierence.alexsupport.name")+"}"),
     i18n.t("expierence.parttime"),
-    i18n.t("expierence.tmp") + "Develop and maintenance telegram bot for it-support restaurants. It's deployed on lxc, "
-                               "using postgresql, mongodb, django, celery"
+    i18n.t("expierence.alexsupport.supportbot.describe")
 )
 
 itsm_pycards = Job(
@@ -101,8 +90,7 @@ itsm_pycards = Job(
     i18n.t("expierence.alexsupport.pds.title"),  # + "Developer(Python, C++) ",
     NoEscape("\\textbf{"+i18n.t("expierence.alexsupport.name")+"}"),
     i18n.t("expierence.parttime"),
-    i18n.t("expierence.tmp") + "Develop and maintenance personal discount system for restaurant management company. "
-                               "Cliend-side deployed on windows, server-side on vps.",
+    i18n.t("expierence.alexsupport.pds.describe"),
 )
 itsm_sync_tickets = Job(
     date(2014, 1, 1),
@@ -129,23 +117,19 @@ itsm_pbx = Job(
     i18n.t("expierence.alexsupport.pbx.title"),  # "System Developer(Python) ",
     NoEscape("\\textbf{"+i18n.t("expierence.alexsupport.name")+"}"),
     i18n.t("expierence.parttime"),
-    i18n.t(
-        "expierence.tmp") + "Develop and maintenance PBX for it-support. It's based on asterisk, as endpoints devices used mobile phones. "
-                            "For PBX management used AMI and django-based app. It's also integrated with telegram for convenience. "
-                            "For asyncron tasks used celery. "
-                            "It's deployed on proxmox via lxc with postgresql and mongodb. "
+    i18n.t("expierence.alexsupport.pbx.describe")
 )
 mallina_sysadmin = Job(
     date(2011, 3, 1),
     date(2013, 6, 1),
-    i18n.t("expierence.mallina.title"),  # "System administrator"
-    i18n.t("expierence.tmp") + "\\textbf{Mallina LTD}",
+    i18n.t("expierence.mallina.title"),
+    "\\textbf{"+i18n.t("expierence.mallina.name")+"}",
     "",
     EnumItem(
         arguments=[
-            Item(i18n.t("expierence.tmp") + "System and network administration"),
-            Item(i18n.t("expierence.tmp") + "Resolving IT-like problems"),
-            Item(i18n.t("expierence.tmp") + "Support users"),
+            Item(i18n.t("expierence.mallina.d1")),
+            Item(i18n.t("expierence.mallina.d2")),
+            Item(i18n.t("expierence.mallina.d3")),
         ]
     ),
 )
@@ -153,7 +137,7 @@ mallina_ittech = Job(
     date(2011, 3, 1),
     date(2013, 6, 1),
     i18n.t("expierence.mallina1.title") + "It Support ",
-    i18n.t("expierence.tmp") + "\\textbf{Mallina LTD}",
+    "\\textbf{"+i18n.t("expierence.mallina.name")+"}",
     "",
     EnumItem(
         arguments=[
