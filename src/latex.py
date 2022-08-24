@@ -1,26 +1,11 @@
 import os
 import shutil
-from datetime import datetime
 
-from pylatex import (
-    Alignat,
-    Axis,
-    Command,
-    Document,
-    Figure,
-    Math,
-    Matrix,
-    Plot,
-    Section,
-    Subsection,
-    Tabular,
-    TikZ,
-    UnsafeCommand,
-)
+from pylatex import Command, Document, Section
 from pylatex.base_classes import Arguments, CommandBase, Environment
 from pylatex.utils import NoEscape
 
-import exp
+import i18n
 
 
 class TwentyItem(CommandBase):
@@ -33,10 +18,15 @@ class Twenty(Environment):
 
 if __name__ == "__main__":
     image_filename = os.path.join(os.path.dirname(__file__), "img/linkedin.png")
+    i18n.load_path.append("./i18n/")
+    i18n.set('locale', 'ru')
+    i18n.set('fallback', 'en')
 
-    name = "Michael"
-    surname = "Prokopenko"
-    title = "DevOps"
+    import exp
+
+    name = i18n.t("person.Michael")
+    surname = i18n.t("person.Prokopenko")
+    title = i18n.t("person.DevOps")
     doc = Document(
         documentclass="twentysecondcv",
         document_options=[
@@ -47,14 +37,14 @@ if __name__ == "__main__":
     doc.preamble.append(
         Command("cvname", NoEscape(f"{name}\\\\{surname}"))
     )  # your name
-    doc.preamble.append(Command("cvjobtitle", title))  # your actual job position
-    doc.preamble.append(Command("cvaddress", "Montenegro, Bar"))  # address
+    doc.preamble.append(Command("cvjobtitle", title))
+    # doc.preamble.append(Command("cvaddress", i18n.t("person.cvaddress")))
     # https://www.google.com/maps/place/Bar,+Montenegro/@42,19,6z/
-    doc.preamble.append(Command("cvnumberphone", "+382 6853 9017"))  # telephone number
-    doc.preamble.append(Command("cvmail", "mike.pro@alexsupport.org"))  # e-mail
-    # doc.preamble.append(Command("cvlinkedin", "linkedin.com/in/ligzer"))
+    doc.preamble.append(Command("cvnumberphone", i18n.t("person.cvphone")))
+    doc.preamble.append(Command("cvmail", "mike.pro@alexsupport.org"))
+    doc.preamble.append(Command("cvlinkedin", "linkedin.com/in/ligzer"))
     doc.preamble.append(Command("cvtelergram", "t.me/ligzer"))
-    doc.preamble.append(Command("cvrelocation", "Relocation possible"))
+    # doc.preamble.append(Command("cvrelocation", i18n.t("person.cvrelocation")))
     doc.preamble.append(
         NoEscape(
             "\\def\changemargin#1#2{\\list{}{\\rightmargin#2\\leftmargin#1}\\item[]}"
@@ -105,8 +95,7 @@ if __name__ == "__main__":
     doc.append(Command("makeprofile"))
     doc.append(NoEscape("{\Huge\headingfont\color{headercolor}\givencvjobtitle}"))
 
-
-    with doc.create(Section("Work Experience")):
+    with doc.create(Section(i18n.t("person.work_experience"))):
         # doc.append("Experienced in deploying and supporting different it-infrastructures."
         #            "Have sound knowledge of networking and basic network services."
         #            "Develop projects on different languages."
@@ -127,7 +116,7 @@ if __name__ == "__main__":
                     )
                 )
 
-    with doc.create(Section("Education")):
+    with doc.create(Section(i18n.t("person.education"))):
         with doc.create(Twenty()):
             for edu in exp.educations:
                 edu: exp.Job = edu

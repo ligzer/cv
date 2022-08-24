@@ -4,7 +4,9 @@ from pylatex.base_classes import Arguments, CommandBase, Environment
 from pylatex.package import Package
 from pylatex.utils import NoEscape
 
-from .job import Job
+import i18n
+
+from .job import Job, company_url
 
 
 class EnumItem(Environment):
@@ -21,39 +23,38 @@ class Item(CommandBase):
     ]
 
 
-
 anzu = Job(
     date(2017, 11, 1),
     None,
-    "Fullstack developer(JS, Python)",
-    "\href{https://anzujewelry.com/}{\\textbf{Anzu Jewelry}}",
-    "Contract",
-    "Develop and maintenance simple system for accounting production in jewelry workshop. "
-    "In project used systemd, GitLab CI, docker-compose, postgresql. "
-    "For asynchron integration with digital registration system of precious metals used celery and mongodb. "
+    i18n.t("expierence.anzu.title"),
+    company_url(i18n.t("expierence.anzu.url"), i18n.t("expierence.anzu.name")),
+    i18n.t("expierence.contract"),
+    i18n.t("expierence.tmp") + "Develop and maintenance simple system for accounting production in jewelry workshop. "
+                               "In project used systemd, GitLab CI, docker-compose, postgresql. "
+                               "For asynchron integration with digital registration system of precious metals used celery and mongodb. "
 )
 
 reviewcode = Job(
     date(2022, 3, 1),
     None,
-    "Github Administrator",
-    "\href{https://yourcodereview.com/}{\\textbf{YourCodeReview}}",
-    "Part-time",
+    i18n.t("expierence.yourcodereview.title"),  # + "Github Administrator",
+    i18n.t("expierence.tmp") + "\href{https://yourcodereview.com/}{\\textbf{YourCodeReview}}",
+    i18n.t("expierence.parttime"),
     EnumItem(
         arguments=[
-            Item("Preparation and publication projects for code review."),
+            Item(i18n.t("expierence.tmp") + "Preparation and publication projects for code review."),
         ]
     ),
 )
 anzu_first = Job(
     date(2017, 11, 1),
     date(2019, 10, 1),
-    "Fullstack developer(JS, Python) ",
-    "\href{https://anzujewelry.com/}{\\textbf{Anzu Jewelry}}",
-    "Contract",
+    i18n.t("expierence.anzu.title"),  # + "Fullstack developer(JS, Python) ",
+    company_url(i18n.t("expierence.anzu.url"), i18n.t("expierence.anzu.name")),
+    i18n.t("expierence.contract"),
     EnumItem(
         arguments=[
-            Item("System for accounting production in jewelry workshop"),
+            Item(i18n.t("expierence.tmp") + "System for accounting production in jewelry workshop"),
         ]
     ),
 )
@@ -61,10 +62,10 @@ anzu_first = Job(
 itsm_main = Job(
     date(2013, 6, 1),
     None,
-    "IT Support",
-    NoEscape("\\textbf{Alexsupport}"),
-    "Fulltime",
-    NoEscape(
+    i18n.t("expierence.alexsupport.it.title"),  # + "IT Support",
+    NoEscape("\\textbf{"+i18n.t("expierence.alexsupport.name")+"}"),
+    i18n.t("expierence.tmp") + "Fulltime",
+    i18n.t("expierence.tmp") + NoEscape(
         "\\begin{itemize}"
         "{\\item{Deploying and maintenance restaurant-specific products(iiko, r-keeper, sh4)}}"
         "{\\item{Deploying and maintenance popular products(IIS, MSSQL, MS Exchange, Postgresql, "
@@ -78,45 +79,46 @@ itsm_main = Job(
 itsm_tbbot = Job(
     date(2019, 12, 1),
     date(2020, 2, 1),
-    "Python Developer",
-    "\\textbf{Alexsupport}",
-    "Part-time",
-    "Develop telegram bot for reserving tables in restaurant, using only mongodb."
+    i18n.t("expierence.alexsupport.reserverbot.title"),
+    NoEscape("\\textbf{"+i18n.t("expierence.alexsupport.name")+"}"),
+    i18n.t("expierence.parttime"),
+    i18n.t("expierence.tmp") + "Develop telegram bot for reserving tables in restaurant, using only mongodb."
 )
 
 itsm_resendbot = Job(
     date(2018, 9, 1),
     date(2019, 3, 1),
-    "Python Developer",
-    "\\textbf{Alexsupport}",
-    "Part-time",
-    "Develop and maintenance telegram bot for it-support restaurants. It's deployed on lxc, "
-    "using postgresql, mongodb, django, celery"
+    i18n.t("expierence.alexsupport.supportbot.title"),  # + "Python Developer",
+    NoEscape("\\textbf{"+i18n.t("expierence.alexsupport.name")+"}"),
+    i18n.t("expierence.parttime"),
+    i18n.t("expierence.tmp") + "Develop and maintenance telegram bot for it-support restaurants. It's deployed on lxc, "
+                               "using postgresql, mongodb, django, celery"
 )
 
 itsm_pycards = Job(
     date(2018, 1, 1),
     date(2018, 12, 1),
-    "Developer(Python, C++) ",
-    "\\textbf{Alexsupport}",
-    "Part-time",
-    "Develop and maintenance personal discount system for restaurant management company. "
-    "Cliend-side deployed on windows, server-side on vps.",
+    i18n.t("expierence.alexsupport.pds.title"),  # + "Developer(Python, C++) ",
+    NoEscape("\\textbf{"+i18n.t("expierence.alexsupport.name")+"}"),
+    i18n.t("expierence.parttime"),
+    i18n.t("expierence.tmp") + "Develop and maintenance personal discount system for restaurant management company. "
+                               "Cliend-side deployed on windows, server-side on vps.",
 )
 itsm_sync_tickets = Job(
     date(2014, 1, 1),
     date(2014, 12, 1),
-    "System Developer(Python)",
-    "\\textbf{Alexsupport}",
-    "Part-time",
+    i18n.t("expierence.alexsupport.planus.title"),  # + "System Developer(Python)",
+    NoEscape("\\textbf{"+i18n.t("expierence.alexsupport.name")+"}"),
+    i18n.t("expierence.parttime"),
     EnumItem(
         arguments=[
-            Item("Clients prefered use their own ticket system"),
-            Item("We wanted to make possible to work with them all from one point"),
+            Item(i18n.t("expierence.tmp") + "Clients prefered use their own ticket system"),
+            Item(i18n.t("expierence.tmp") + "We wanted to make possible to work with them all from one point"),
             Item(
-                "Develop django application for syncronization tickets from clients ticket-systems to one we was using"
+                i18n.t(
+                    "expierence.tmp") + "Develop django application for syncronization tickets from clients ticket-systems to one we was using"
             ),
-            Item("Later some clients agreed to use the same system."),
+            Item(i18n.t("expierence.tmp") + "Later some clients agreed to use the same system."),
         ]
     ),
     hide=True,
@@ -124,50 +126,51 @@ itsm_sync_tickets = Job(
 itsm_pbx = Job(
     date(2011, 3, 1),
     date(2014, 2, 1),
-    "System Developer(Python) ",
-    "\\textbf{Alexsupport}",
-    "Part-time",
-    "Develop and maintenance PBX for it-support. It's based on asterisk, as endpoints devices used mobile phones. "
-    "For PBX management used AMI and django-based app. It's also integrated with telegram for convenience. "
-    "For asyncron tasks used celery. "
-    "It's deployed on proxmox via lxc with postgresql and mongodb. "
+    i18n.t("expierence.alexsupport.pbx.title"),  # "System Developer(Python) ",
+    NoEscape("\\textbf{"+i18n.t("expierence.alexsupport.name")+"}"),
+    i18n.t("expierence.parttime"),
+    i18n.t(
+        "expierence.tmp") + "Develop and maintenance PBX for it-support. It's based on asterisk, as endpoints devices used mobile phones. "
+                            "For PBX management used AMI and django-based app. It's also integrated with telegram for convenience. "
+                            "For asyncron tasks used celery. "
+                            "It's deployed on proxmox via lxc with postgresql and mongodb. "
 )
 mallina_sysadmin = Job(
     date(2011, 3, 1),
     date(2013, 6, 1),
-    "System administrator",
-    "\\textbf{Mallina LTD}",
+    i18n.t("expierence.mallina.title"),  # "System administrator"
+    i18n.t("expierence.tmp") + "\\textbf{Mallina LTD}",
     "",
     EnumItem(
         arguments=[
-            Item("System and network administration"),
-            Item("Resolving IT-like problems"),
-            Item("Support users"),
+            Item(i18n.t("expierence.tmp") + "System and network administration"),
+            Item(i18n.t("expierence.tmp") + "Resolving IT-like problems"),
+            Item(i18n.t("expierence.tmp") + "Support users"),
         ]
     ),
 )
 mallina_ittech = Job(
     date(2011, 3, 1),
     date(2013, 6, 1),
-    "It Support ",
-    "\\textbf{Mallina LTD}",
+    i18n.t("expierence.mallina1.title") + "It Support ",
+    i18n.t("expierence.tmp") + "\\textbf{Mallina LTD}",
     "",
     EnumItem(
         arguments=[
-            Item("Resolving IT-like problems"),
-            Item("Contact with users"),
+            Item(i18n.t("expierence.tmp") + "Resolving IT-like problems"),
+            Item(i18n.t("expierence.tmp") + "Contact with users"),
         ]
     ),
 )
 bmstu = Job(
     date(2008, 1, 1),
     date(2011, 5, 1),
-    "It Technician",
-    "\href{https://www.bmstu.ru/}{\\textbf{BMSTU}}",
+    i18n.t("expierence.bmstu.title") + "It Technician",
+    i18n.t("expierence.tmp") + "\href{https://www.bmstu.ru/}{\\textbf{BMSTU}}",
     "",
     EnumItem(
         arguments=[
-            Item("Administration, maintenance and upgrade of computer class"),
+            Item(i18n.t("expierence.tmp") + "Administration, maintenance and upgrade of computer class"),
         ]
     ),
 )

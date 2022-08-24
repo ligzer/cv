@@ -1,4 +1,5 @@
-from exp import exp, edu
+from exp import edu, exp
+
 from .job import Job
 
 jobs = [

@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 pylatex = "==1.4.1"
+python-i18n = {version = "==0.3.9", extras = ["yaml"]}
 
 [dev-packages]
 

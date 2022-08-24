@@ -1,0 +1,23 @@
+en:
+  contract: Contract
+  parttime: Part-Time
+  anzu:
+    title: Fullstack developer(JS, Python)
+    url: https://anzujewelry.com/
+    name: Anzu Jewelry
+  alexsupport:
+    name: Alexsupport
+    reserverbot:
+      title: Python Developer
+    supportbot:
+      title: Python Developer
+    pds:
+      title: Developer(Python, C++)
+    pbx:
+      title: System Developer(Python)
+    it:
+      title: IT Support
+  mallina:
+    title: System administrator
+
+

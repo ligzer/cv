@@ -1,20 +1,22 @@
 from datetime import date
 
-from .job import Job
+import i18n
+
+from .job import Job, company_url
 
 praktikum_devops = Job(
     date(2021, 12, 1),
-    date(2022, 8, 1),
+    date(2022, 10, 1),
     "",
-    "\href{https://practicum.yandex.ru/promo/devops-course}{\\textbf{Yandex Practicum}}",
+    company_url( i18n.t("education.ya.url"), i18n.t("education.ya.name")) ,
     "",
-    "DevOps - for use and development. A course for experienced professionals",
+    i18n.t("education.ya.describe"),
 )
 bmstu = Job(
     date(2017, 9, 1),
     date(2020, 6, 1),
     "",
-    "\href{https://www.bmstu.ru/}{\\textbf{Bauman Moscow State Technical University}}",
+    company_url(i18n.t("education.bmstu.url"), i18n.t("education.bmstu.name")),
     "",
-    "Plasma engine's specialization - incomplete",
+    i18n.t("education.bmstu.describe"),
 )

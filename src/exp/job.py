@@ -1,9 +1,13 @@
 from pylatex.utils import NoEscape
 
 
+def company_url(url, company):
+    return "\href{" + url + "}{\\textbf{" + company + "}}"
+
+
 class Job:
     def __init__(
-        self, date_begin, date_end, title, company, format, description, hide=False
+            self, date_begin, date_end, title, company, format, description, hide=False
     ):
         self.date_begin = date_begin
         self.date_end = date_end

@@ -1,0 +1,9 @@
+en:
+  ya:
+    url: https://practicum.yandex.ru/promo/devops-course
+    name: Yandex Practicum
+    describe: DevOps - for use and development. A course for experienced professionals
+  bmstu:
+    url: https://www.bmstu.ru/
+    name: Bauman Moscow State Technical University
+    describe: Plasma engine's specialization - incomplete
