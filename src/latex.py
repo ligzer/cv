@@ -19,7 +19,7 @@ class Twenty(Environment):
 if __name__ == "__main__":
     image_filename = os.path.join(os.path.dirname(__file__), "img/linkedin.png")
     i18n.load_path.append("./i18n/")
-    i18n.set('locale', 'ru')
+    i18n.set('locale', 'en')
     i18n.set('fallback', 'en')
 
     import exp
@@ -38,13 +38,13 @@ if __name__ == "__main__":
         Command("cvname", NoEscape(f"{name}\\\\{surname}"))
     )  # your name
     doc.preamble.append(Command("cvjobtitle", title))
-    # doc.preamble.append(Command("cvaddress", i18n.t("person.cvaddress")))
+    doc.preamble.append(Command("cvaddress", i18n.t("person.cvaddress")))
     # https://www.google.com/maps/place/Bar,+Montenegro/@42,19,6z/
     doc.preamble.append(Command("cvnumberphone", i18n.t("person.cvphone")))
     doc.preamble.append(Command("cvmail", "mike.pro@alexsupport.org"))
     doc.preamble.append(Command("cvlinkedin", "linkedin.com/in/ligzer"))
     doc.preamble.append(Command("cvtelergram", "t.me/ligzer"))
-    # doc.preamble.append(Command("cvrelocation", i18n.t("person.cvrelocation")))
+    doc.preamble.append(Command("cvrelocation", i18n.t("person.cvrelocation")))
     doc.preamble.append(
         NoEscape(
             "\\def\changemargin#1#2{\\list{}{\\rightmargin#2\\leftmargin#1}\\item[]}"

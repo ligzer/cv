@@ -63,7 +63,15 @@ itsm_main = Job(
     i18n.t("expierence.alexsupport.it.title"),  # + "IT Support",
     NoEscape("\\textbf{"+i18n.t("expierence.alexsupport.name")+"}"),
     i18n.t("expierence.fulltime"),
-    NoEscape(i18n.t("expierence.alexsupport.it.describe"))
+    # NoEscape(i18n.t("expierence.alexsupport.it.describe"))
+    EnumItem(
+        arguments=[
+            Item(i18n.t("expierence.alexsupport.it.d1")),
+            Item(i18n.t("expierence.alexsupport.it.d2")),
+            Item(i18n.t("expierence.alexsupport.it.d3")),
+            Item(i18n.t("expierence.alexsupport.it.d4")),
+        ]
+    )
 )
 
 itsm_tbbot = Job(

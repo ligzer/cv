@@ -1,5 +1,5 @@
 from pylatex.utils import NoEscape
-
+import i18n
 
 def company_url(url, company):
     return "\href{" + url + "}{\\textbf{" + company + "}}"
@@ -22,5 +22,5 @@ class Job:
         if self.date_end:
             end = self.date_end.strftime("%b %Y")
         else:
-            end = "..."
+            end = i18n.t("expierence.nowdays")
         return NoEscape(f"{begin} -\\\\{end}")
