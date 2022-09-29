@@ -1,2 +1,5 @@
 /venv/
 /.idea/
+*.aux
+*.log
+*.synctex.gz
