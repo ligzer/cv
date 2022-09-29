@@ -1,9 +1,6 @@
 /venv/
 /.idea/
-__pycache__
+*.aux
+*.log
+*.synctex.gz
 /Pipfile.lock
-src/latex/*.pdf
-src/latex/*.out
-src/latex/*.log
-src/latex/*.aux
-src/latex/*.tex
