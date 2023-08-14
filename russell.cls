@@ -532,7 +532,7 @@
         {}%
         {%
           \ifbool{isstart}{\setbool{isstart}{false}}{\acvHeaderSocialSep}%
-          \href{https://t.me/\@telegram}{\faTelegram\acvHeaderIconSep\@telegram}%
+          \href{https://\@telegram}{\faTelegram\acvHeaderIconSep\@telegram}%
         }%
       \ifthenelse{\isundefined{\@reddit}}%
         {}%
